@@ -13,6 +13,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         LogUtils.i("888time1--t1-t1->t1");
+        LogUtils.i("888time1--t1-t1->t1");
         long t1 = System.currentTimeMillis();
     }
 }
