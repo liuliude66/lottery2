@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.forum.lottery.R;
 import com.forum.lottery.ui.base.BaseActivity;
+import com.forum.lottery.utils.LogUtils;
 
 public class MainActivity extends BaseActivity {
 
@@ -14,6 +15,6 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         long t1 = System.currentTimeMillis();
-        Log.i("MainActivity", "time1---->" + t1);
+        LogUtils.i("MainActivity", "time1---->" + t1);
     }
 }
