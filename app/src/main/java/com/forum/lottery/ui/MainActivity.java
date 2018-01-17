@@ -12,10 +12,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         LogUtils.i("888time1--t1-t1->t1");
         long t1 = System.currentTimeMillis();
-        LogUtils.i("123dev-time1--t1-t1->t1" + t1);
-        LogUtils.i("dev-23dev-time1--t1-t1->t1" + t1);
     }
 }
