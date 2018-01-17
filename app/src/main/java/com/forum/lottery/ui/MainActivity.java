@@ -15,9 +15,6 @@ public class MainActivity extends BaseActivity {
 
         LogUtils.i("888time1--t1-t1->t1");
         long t1 = System.currentTimeMillis();
-
-        LogUtils.i("666time1--t1-t1->t1" + t1);
-        LogUtils.i("699time1--t1-t1->t1" + t1);
         LogUtils.i("123dev-time1--t1-t1->t1" + t1);
         LogUtils.i("dev-23dev-time1--t1-t1->t1" + t1);
     }
