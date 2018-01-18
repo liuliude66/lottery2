@@ -1,9 +1,9 @@
-package com.forum.lottery.ui;
+package com.forum.lottery.component.ui;
 
 import android.os.Bundle;
 
 import com.forum.lottery.R;
-import com.forum.lottery.ui.base.BaseActivity;
+import com.forum.lottery.component.ui.base.BaseActivity;
 import com.forum.lottery.utils.LogUtils;
 
 public class MainActivity extends BaseActivity {

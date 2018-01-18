@@ -1,4 +1,4 @@
-package com.forum.lottery.ui.base;
+package com.forum.lottery.component.ui.base;
 
 import android.app.Activity;
 
