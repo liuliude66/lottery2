@@ -8,7 +8,7 @@ import android.os.Message;
 import com.forum.lottery.component.service.HeartBeatService;
 
 /**
- * 所有Activity类的初始基类
+ * 所有Activity类的原始基类
  */
 
 public abstract class BaseActivity extends Activity {
@@ -26,5 +26,20 @@ public abstract class BaseActivity extends Activity {
         startService(new Intent(this, HeartBeatService.class));
     }
 
+    //网络通用的通知连接器
+    protected Handler mCommonHandler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message message) {
+            return false;
+        }
+    });
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        pauseActivityAction();
+    }
+
+    //终止跳转时的操作行为
+    protected void pauseActivityAction(){}
 }

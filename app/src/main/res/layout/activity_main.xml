@@ -4,13 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bar_top_height">
 
+        <include layout="@layout/bar_top" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="Hello World!" />
+
+    <lottery.forum.com.marqueeview.MarqueeView
+        android:id="@+id/marquee"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_centerVertical="true"
+        app:speed="40dp"
+        app:text_color="@color/bg_blue"
+        app:text_shadowColor="@android:color/black"
+        app:text_size="16sp"
+        app:txt_dx="1.0"
+        app:txt_dy="1.0"
+        app:txt_radius="1.0"
+        app:txt_spacing="15dp" />
 </RelativeLayout>
