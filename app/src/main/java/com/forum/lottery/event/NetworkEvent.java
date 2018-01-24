@@ -1,7 +1,7 @@
 package com.forum.lottery.event;
 
 /**
- * 网络状态中转器.
+ * 网络状态中转器 实体类.
  */
 
 public class NetworkEvent {

@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
  */
 
 public class LoadingDialog extends Dialog{
-    public LoadingDialog(@NonNull Context context) {
+    public LoadingDialog(Context context) {
         super(context);
     }
 }

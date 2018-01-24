@@ -26,10 +26,6 @@
             android:name=".component.service.HeartBeatService"
             android:enabled="true"
             android:exported="true" />
-        <service
-            android:name=".component.service.MyService"
-            android:enabled="true"
-            android:exported="true" />
 
         <receiver
             android:name=".component.broadcast.NetBroadcastReceiver"

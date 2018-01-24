@@ -9,7 +9,11 @@ import android.net.NetworkInfo;
  */
 
 public class NetWorkUtils {
-    //检测本机的网络是否可用
+    /**
+     * @param context 上下文环境
+     * @return boolean 返回当前的网络状态
+     * @description 检测本机的网络是否可用
+     */
     public static boolean checkWorkAvailable(Context context) {
         ConnectivityManager manager = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (manager == null) {

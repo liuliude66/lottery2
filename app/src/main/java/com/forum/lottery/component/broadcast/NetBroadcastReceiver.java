@@ -7,6 +7,9 @@ import android.net.ConnectivityManager;
 
 import com.forum.lottery.utils.NetWorkUtils;
 
+/**
+ * 网络状态监听广播器
+ **/
 public class NetBroadcastReceiver extends BroadcastReceiver {
 
     private NetEvent netEvent;
@@ -27,6 +30,9 @@ public class NetBroadcastReceiver extends BroadcastReceiver {
         this.netEvent = netEvent;
     }
 
+    /**
+     * 网络状态通知回调接口
+     */
     public interface NetEvent {
         void onNetChange(boolean status);
     }

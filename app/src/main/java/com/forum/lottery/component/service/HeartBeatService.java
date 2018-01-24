@@ -13,6 +13,9 @@ import com.forum.lottery.utils.SharedPreferenceUtils;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * 心跳监听包
+ **/
 public class HeartBeatService extends Service {
 
     private Timer messagesAndNoticesHeartBeatTimer = null;
@@ -21,7 +24,7 @@ public class HeartBeatService extends Service {
     private Context mContext;
     private Handler mHandler;
 
-    public HeartBeatService(){
+    public HeartBeatService() {
 
     }
 
@@ -57,23 +60,28 @@ public class HeartBeatService extends Service {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    //终止计时器操作
-    private void terminalMessagesAndNoticesTimerTask(){
-        if (messagesAndNoticesHearBeatTimeTask != null){
+    /**
+     * 终止计时器操作
+     */
+    private void terminalMessagesAndNoticesTimerTask() {
+        if (messagesAndNoticesHearBeatTimeTask != null) {
             messagesAndNoticesHearBeatTimeTask.cancel();
             messagesAndNoticesHearBeatTimeTask = null;
         }
-        if (messagesAndNoticesHeartBeatTimer != null){
+        if (messagesAndNoticesHeartBeatTimer != null) {
             messagesAndNoticesHeartBeatTimer.cancel();
             messagesAndNoticesHeartBeatTimer = null;
         }
     }
 
-    private void startMessagesAndNoticesTimerTask(){
-        if (messagesAndNoticesHeartBeatTimer == null){
+    /**
+     * 启动计时器操作
+     */
+    private void startMessagesAndNoticesTimerTask() {
+        if (messagesAndNoticesHeartBeatTimer == null) {
             messagesAndNoticesHeartBeatTimer = new Timer();
         }
-        if (messagesAndNoticesHearBeatTimeTask == null){
+        if (messagesAndNoticesHearBeatTimeTask == null) {
             messagesAndNoticesHearBeatTimeTask = new TimerTask() {
                 @Override
                 public void run() {
@@ -85,8 +93,10 @@ public class HeartBeatService extends Service {
         messagesAndNoticesHeartBeatTimer.schedule(messagesAndNoticesHearBeatTimeTask, ParameterUtils.GlobalConfig.HeatBeatMsgAndNoticesDelay, ParameterUtils.GlobalConfig.HeatBeatMsgAndNoticesInterval);
     }
 
-    //执行网络请求
-    private void execNetRequestCommonInfo(){
+    /**
+     * 执行网络请求（通告（普通、维护）、客服消息）
+     */
+    private void execNetRequestCommonInfo() {
         String url = ParameterUtils.DOMAIN.NORMAL_DOMAIN + ParameterUtils.URLS.HEART_BEAT_URL;
         //封装okhttp 的服务
 

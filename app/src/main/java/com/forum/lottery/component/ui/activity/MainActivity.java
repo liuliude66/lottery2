@@ -1,18 +1,14 @@
 package com.forum.lottery.component.ui.activity;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.forum.lottery.R;
 import com.forum.lottery.component.ui.base.BaseActivity;
-import com.forum.lottery.utils.LogUtils;
 import com.forum.lottery.utils.PixelUtils;
 import com.forum.lottery.view.layout.SingleLayout;
 

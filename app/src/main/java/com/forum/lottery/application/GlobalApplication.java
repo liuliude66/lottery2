@@ -5,7 +5,7 @@ import android.app.Application;
 import java.util.TimeZone;
 
 /**
- * Created by DELL on 2018/1/17.
+ * 自定义应用组件 on 2018/1/17.
  */
 
 public class GlobalApplication extends Application {
