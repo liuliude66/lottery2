@@ -2,33 +2,25 @@ package com.forum.lottery.component.ui.base;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.forum.lottery.component.broadcast.NetBroadcastReceiver;
 import com.forum.lottery.component.service.HeartBeatService;
 
 /**
  * 所有Activity类的原始基类
  */
 
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends Activity implements NetBroadcastReceiver.NetEvent{
 
     public static final String NetworkKey = "NetworkKey";
     public static final int NetworkStatusCode = 0x000001;
 
-    //网络检测的心跳包
-    protected Handler mNetWorkHandler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message message) {
-            switch (message.getData().getInt(NetworkKey)){
-                case NetworkStatusCode:
-                    notifyNetworkStatusChange();
-                    break;
-            }
-            return false;
-        }
-    });
+    private NetBroadcastReceiver mNetworkBroadcastReceiver;
 
     //通用通知连接器
     protected Handler mCommonHandler = new Handler(new Handler.Callback() {
@@ -39,8 +31,19 @@ public abstract class BaseActivity extends Activity {
     });
 
     //通知网络状态变化的行为变更
-    private void notifyNetworkStatusChange(){
+    private void notifyNetworkStatusChange(boolean status){
         executeNetworkStatusChange();
+    }
+
+    //注册网络状态的广播
+    protected void startRegisterReceivers(){
+        if (mNetworkBroadcastReceiver == null) {
+            mNetworkBroadcastReceiver = new NetBroadcastReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+            registerReceiver(mNetworkBroadcastReceiver, filter);
+            mNetworkBroadcastReceiver.setNetEvent(this);
+        }
     }
 
     //执行网络状态变化的行为变更行为
@@ -97,11 +100,25 @@ public abstract class BaseActivity extends Activity {
         terminalAllTimer();
         //终止所有的自定义服务
         terminalAllSelfService();
+        //终止广播
+        unregisterReceivers();
     }
 
-    protected void terminalAllTimer(){}
+    protected void terminalAllTimer(){
+
+    }
+
     protected void terminalAllSelfService(){
         stopHeartBeatService();
+    }
+
+    protected void unregisterReceivers(){
 
     }
+
+    //网络变化时候的行为
+    public void onNetChange(boolean status){
+        notifyNetworkStatusChange(status);
+    }
+
 }

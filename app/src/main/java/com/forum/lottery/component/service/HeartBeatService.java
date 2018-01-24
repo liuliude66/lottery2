@@ -15,8 +15,8 @@ import java.util.TimerTask;
 
 public class HeartBeatService extends Service {
 
-    private Timer messagesAndNoticesHeartBeatTimer = null, networkStatusHeartBeatTimer = null;
-    private TimerTask messagesAndNoticesHearBeatTimeTask = null, networkStatusHeartBeatTimerTask = null;
+    private Timer messagesAndNoticesHeartBeatTimer = null;
+    private TimerTask messagesAndNoticesHearBeatTimeTask = null;
 
     private Context mContext;
     private Handler mHandler;
@@ -43,7 +43,6 @@ public class HeartBeatService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         //开启一个计时器，每次间隔10秒钟请求一次网络数据，主要面对的功能有（通告（普通、维护）、客服消息）
         startMessagesAndNoticesTimerTask();
-        startNetWorkObtainStatusTask(intent);
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -84,29 +83,6 @@ public class HeartBeatService extends Service {
             };
         }
         messagesAndNoticesHeartBeatTimer.schedule(messagesAndNoticesHearBeatTimeTask, ParameterUtils.GlobalConfig.HeatBeatMsgAndNoticesDelay, ParameterUtils.GlobalConfig.HeatBeatMsgAndNoticesInterval);
-    }
-
-    //启动网络状态的心跳监听程序
-    private void startNetWorkObtainStatusTask(Intent intent){
-        if (networkStatusHeartBeatTimer == null){
-            networkStatusHeartBeatTimer = new Timer();
-        }
-        if (networkStatusHeartBeatTimerTask == null){
-            networkStatusHeartBeatTimerTask = new TimerTask() {
-                @Override
-                public void run() {
-                    //执行网络请求（通告（普通、维护）、客服消息）；
-                    checkNetworkStatus();
-                }
-            };
-        }
-        networkStatusHeartBeatTimer.schedule(networkStatusHeartBeatTimerTask, ParameterUtils.GlobalConfig.HeatBeatNetworkDelay, ParameterUtils.GlobalConfig.HeatBeatNetworkInterval);
-    }
-
-    //检测网络状态
-    private void checkNetworkStatus(){
-        boolean status = NetWorkUtils.checkWorkAvailable(getBaseContext());
-        SharedPreferenceUtils.putBoolean(getBaseContext(), SharedPreferenceUtils.NETWORK_STATUS, status);
     }
 
     //执行网络请求
