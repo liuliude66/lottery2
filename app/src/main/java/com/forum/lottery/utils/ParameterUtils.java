@@ -22,8 +22,5 @@ public class ParameterUtils {
         //网络通告 或者 客服消息 的参数时间配置
         public static final int HeatBeatMsgAndNoticesInterval = 10 * 1000;
         public static final int HeatBeatMsgAndNoticesDelay = 10;
-        //网络通告 或者 客服消息 的参数时间配置
-        public static final int HeatBeatNetworkInterval = 10 * 60 * 1000;//10分钟监听一次
-        public static final int HeatBeatNetworkDelay = 10;
     }
 }
