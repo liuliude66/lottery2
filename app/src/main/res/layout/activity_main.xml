@@ -46,7 +46,7 @@
         android:background="@color/bg_blue" />
 
 
-    <lottery.forum.com.marqueeview.MarqueeView
+    <com.forum.lottery.view.marqueeview.MarqueeView
         android:id="@+id/marquee"
         android:layout_width="match_parent"
         android:layout_height="25dp"

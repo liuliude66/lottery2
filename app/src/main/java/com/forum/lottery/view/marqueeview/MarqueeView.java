@@ -1,4 +1,4 @@
-package lottery.forum.com.marqueeview;
+package com.forum.lottery.view.marqueeview;
 
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
@@ -12,6 +12,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
+
+import com.forum.lottery.R;
 
 
 public class MarqueeView extends View {
