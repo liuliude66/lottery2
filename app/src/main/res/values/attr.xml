@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BorderGridView">
+        <attr name="borderFlag">
+            <flag name="left" value="1" />
+            <flag name="top" value="2" />
+            <flag name="right" value="4" />
+            <flag name="bottom" value="8" />
+        </attr>
+        <attr name="verticalBorderColor" format="color" />
+        <attr name="horizontalBorderColor" format="color" />
+        <attr name="verticalBorderWidth" format="dimension" />
+        <attr name="horizontalBorderWidth" format="dimension" />
+    </declare-styleable>
+</resources>
