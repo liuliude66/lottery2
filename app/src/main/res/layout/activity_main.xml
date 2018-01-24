@@ -5,18 +5,46 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/ll_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bar_top_height">
 
         <include layout="@layout/bar_top" />
     </LinearLayout>
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/rl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_top"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:paddingBottom="45dp"
+            android:text="@string/hello_blank_fragment" />
+
+    </RelativeLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:text="Hello World!" />
+        android:layout_alignParentBottom="true">
+
+        <include layout="@layout/bar_bottom" />
+    </LinearLayout>
+
+    <com.forum.lottery.view.layout.SingleLayout
+        android:id="@+id/sl_dynamic"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@color/bg_blue" />
+
 
     <lottery.forum.com.marqueeview.MarqueeView
         android:id="@+id/marquee"

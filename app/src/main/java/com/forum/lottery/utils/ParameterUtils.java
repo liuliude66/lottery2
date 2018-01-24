@@ -8,12 +8,22 @@ public class ParameterUtils {
 
     //域名
     public final class DOMAIN {
-        static final String normalDomain = "";//正式环境
-        static final String testDomain = "";//试玩环境
+        public static final String NORMAL_DOMAIN = "";//正式环境
+        public static final String DEMO_DOMAIN = "";//试玩环境
     }
 
     //各项网络域名的请求地址
     public final class URLS {
+        //网络心跳的地址
+        public static final String HEART_BEAT_URL = "/im/customer_service/customer_heartbeat.do";
+    }
 
+    public final class GlobalConfig {
+        //网络通告 或者 客服消息 的参数时间配置
+        public static final int HeatBeatMsgAndNoticesInterval = 10 * 1000;
+        public static final int HeatBeatMsgAndNoticesDelay = 10;
+        //网络通告 或者 客服消息 的参数时间配置
+        public static final int HeatBeatNetworkInterval = 10 * 60 * 1000;//10分钟监听一次
+        public static final int HeatBeatNetworkDelay = 10;
     }
 }

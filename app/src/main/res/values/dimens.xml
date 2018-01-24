@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="bar_top_height">50dp</dimen>
+    <dimen name="bar_bot_height">60dp</dimen>
+    <dimen name="bar_bot_img_h">25dp</dimen>
+    <dimen name="bar_bot_img_big_h">35dp</dimen>
+    <dimen name="bar_bot_low_height">48dp</dimen>
+    <dimen name="bar_bot_margin_b">3dp</dimen>
+    <dimen name="bar_bot_font_s">10sp</dimen>
+    <dimen name="font_s">10sp</dimen>
+    <dimen name="item_lottery_h">30dp</dimen>
+    <dimen name="bar_bot_img_size">30dp</dimen>
+    <dimen name="item_lottery_pad8">8dp</dimen>
 </resources>

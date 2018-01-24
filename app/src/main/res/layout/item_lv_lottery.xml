@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_lottery_h"
+    android:background="@color/item_gray"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_lot_issue"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:gravity="center|end"
+        android:paddingEnd="@dimen/item_lottery_pad8"
+        android:paddingRight="@dimen/item_lottery_pad8"
+        android:text="- - - - - - - - - - - - -"
+        android:textColor="@color/tv_gray"
+        android:textSize="@dimen/font_s" />
+
+    <RelativeLayout
+        android:layout_width="10dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="8dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/gray" />
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/shape_dot" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/gray" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_lottery_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="start|center_vertical"
+        android:paddingLeft="@dimen/item_lottery_pad8"
+        android:paddingStart="@dimen/item_lottery_pad8"
+        android:text="- - - - -"
+        android:textColor="@color/tv_gray"
+        android:textSize="@dimen/bar_bot_font_s" />
+</LinearLayout>
