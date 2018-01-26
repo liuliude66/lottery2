@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_et_container"
+        android:layout_marginEnd="@dimen/login_mr"
+        android:layout_marginLeft="@dimen/login_ml"
+        android:layout_marginRight="@dimen/login_mr"
+        android:layout_marginStart="@dimen/login_ml"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
+
+        <TextView
+            android:id="@+id/tv_username"
+            style="@style/LoginTxt"
+            android:text="@string/login_account" />
+
+        <EditText
+            android:id="@+id/et_login_username"
+            style="@style/LoginEt"
+            android:layout_toEndOf="@+id/tv_username"
+            android:layout_toRightOf="@+id/tv_username"
+            android:hint="@string/login_account" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_et_container"
+        android:layout_marginEnd="@dimen/login_mr"
+        android:layout_marginLeft="@dimen/login_ml"
+        android:layout_marginRight="@dimen/login_mr"
+        android:layout_marginStart="@dimen/login_ml"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
+
+        <TextView
+            android:id="@+id/tv_password"
+            style="@style/LoginTxt"
+            android:text="@string/login_password" />
+
+        <EditText
+            android:id="@+id/et_login_password"
+            style="@style/LoginEt"
+            android:layout_toEndOf="@+id/tv_password"
+            android:layout_toRightOf="@+id/tv_password"
+            android:hint="@string/login_password" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_et_container"
+        android:layout_marginEnd="@dimen/login_mr"
+        android:layout_marginLeft="@dimen/login_ml"
+        android:layout_marginRight="@dimen/login_mr"
+        android:layout_marginStart="@dimen/login_ml"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_corner"
+            android:text="@string/login_sign" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_et_container"
+        android:layout_marginEnd="@dimen/login_mr"
+        android:layout_marginLeft="@dimen/login_ml"
+        android:layout_marginRight="@dimen/login_mr"
+        android:layout_marginStart="@dimen/login_ml"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
+
+        <Button
+            android:id="@+id/btn_reg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_corner_et"
+            android:text="@string/login_reg" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_et_container"
+        android:layout_marginEnd="@dimen/login_mr"
+        android:layout_marginLeft="@dimen/login_ml"
+        android:layout_marginRight="@dimen/login_mr"
+        android:layout_marginStart="@dimen/login_ml"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
+
+        <Button
+            android:id="@+id/btn_demo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_corner_et"
+            android:text="@string/login_demo" />
+
+    </RelativeLayout>
+</LinearLayout>

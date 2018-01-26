@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 
+import com.forum.lot.R;
 import com.forum.lot.utils.ParameterUtils;
 
 /**
@@ -33,6 +34,9 @@ public abstract class BaseAbUIActivity extends BaseActivity {
                 case ParameterUtils.CODES.NO_JSON_CODE:
                     noReturnValueNotJsonAction();
                     break;
+                case ParameterUtils.CODES.LOGIN_SUCCESS_CODE:
+                    handleLoginSuccess();
+                    break;
             }
             return false;
         }
@@ -43,16 +47,22 @@ public abstract class BaseAbUIActivity extends BaseActivity {
     protected void obtainMessageAction(String message){}
     protected void noReturnValueNotJsonAction(){}
 
+    protected void handleLoginSuccess(){}
+
     protected BaseClickListener mBaseClickListener = new BaseClickListener();
 
     private final class BaseClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
             switch (view.getId()){
-
+                case R.id.btn_login:
+                    loginAction();
+                    break;
             }
         }
     }
+
+    protected void loginAction(){}
 
     protected void sendMessageToHandler(int code){
         Message msg = mBridgeHandler.obtainMessage();

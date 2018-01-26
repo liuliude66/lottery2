@@ -1,5 +1,6 @@
 package com.forum.lot.component.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -41,49 +43,23 @@ import java.util.List;
 
 import okhttp3.Request;
 
-public class MainActivity extends BaseAbUIActivity {
+public class LoginActivity extends BaseAbUIActivity {
 
-    private List<Fragment> mFragments;
-    private ViewPager mFragmentsViewPager;
-    private MainFragmentPagerAdapter mFragmentPagerAdapter;
-
-    private FragmentManager mFragmentManager;
-    private FragmentTransaction mCurTransaction = null;
-    private Fragment mCurrentPrimaryItem = null;
+    private EditText mUsernameEt, mPasswordEt;
+    private String mUsername, mPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         initView();
 
-        initFragments();
-
         initBaseConfig();
 
-        loginRequestTest();
     }
 
-    private void initFragments(){
-        mFragments = new ArrayList<>();
-        mFragments.add(new HomeGridFragment());
-        mFragments.add(new LotteryGridFragment());
-        mFragments.add(new MatchFragment());
-        mFragments.add(new LotteryListFragment());
-        mFragments.add(new PersonFragment());
-
-        mFragmentManager = getSupportFragmentManager();
-        mFragmentPagerAdapter = new MainFragmentPagerAdapter(mFragmentManager, mFragments);
-        mFragmentsViewPager.setAdapter(mFragmentPagerAdapter);
-        mFragmentsViewPager.setCurrentItem(0);
-        mCurTransaction = mFragmentManager.beginTransaction();
-        mCurTransaction.commit();
-
-        mFragmentsViewPager.addOnPageChangeListener(new FragmentPageChangeListener());
-    }
-
-    private void loginRequestTest(){
+    private void requestLogin(){
         getSessionValidate();
     }
 
@@ -91,20 +67,23 @@ public class MainActivity extends BaseAbUIActivity {
         OkHttpClientManager.getInstance().asyncPost(ParameterUtils.URLS.SESSION_URL, "", new OkHttpClientManager.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
+                LogUtils.debug("message--------------->" + e.getMessage());
                 sendMessageToHandler(ParameterUtils.CODES.OBTAIN_SESSION_FAILURE_CODE);
             }
 
             @Override
             public void onSuccess(Request request, String result) {
-                LogUtils.debug("message--------------->onSuccess--> result->" + result);
+                LogUtils.debug("message--------------->result" + result);
                 Gson gson = new Gson();
                 ResultEntity<JsonObject> entity = gson.fromJson(result, new TypeToken<ResultEntity<JsonObject>>(){}.getType());
+                LogUtils.debug("message--------------->entity.code-->" + entity.code);
                 if (entity.code == 0){
                     JsonObject data = entity.data;
-                    if (JsonUtils.isJson(data.toString())){
+                    if (!JsonUtils.isJson(data.toString())){
                         sendMessageToHandler(ParameterUtils.CODES.NO_JSON_CODE);
                         return;
                     }
+                    LogUtils.debug("message--------------->data-->" + data);
                     RequestHeader.getInstance().sessionID = data.get("sessionid").getAsString();
                     long expiryTime = data.get("expiryTime").getAsLong();
                     sendMessageToHandler(ParameterUtils.CODES.OBTAIN_SESSION_SUCCESS_CODE);
@@ -131,19 +110,21 @@ public class MainActivity extends BaseAbUIActivity {
             OkHttpClientManager.getInstance().asyncPost(ParameterUtils.URLS.LOGIN_URL, parameter, new OkHttpClientManager.HttpCallBack() {
                 @Override
                 public void onError(Request request, IOException e) {
+                    LogUtils.debug("message--------------->" + e.getMessage());
                     sendMessageToHandler(ParameterUtils.CODES.LOGIN_FAILURE_CODE);
                 }
 
                 @Override
                 public void onSuccess(Request request, String result) {
+                    LogUtils.debug("message--------------->result" + result);
                     Gson gson = new Gson();
                     ResultEntity<JsonObject> entity = gson.fromJson(result, new TypeToken<ResultEntity<JsonObject>>(){}.getType());
                     if (entity.code == 0){
                         JsonObject data = entity.data;
-                        if (JsonUtils.isJson(data.toString())){
+                        /*if (!JsonUtils.isJson(data.toString())){
                             sendMessageToHandler(ParameterUtils.CODES.NO_JSON_CODE);
                             return;
-                        }
+                        }*/
                         SharedPreferenceUtils.putInfo(getBaseContext(), SharedPreferenceUtils.LOGIN_AUTHOR_USERID, String.valueOf(data.get("userId").getAsInt()));
                         SharedPreferenceUtils.putInfo(getBaseContext(), SharedPreferenceUtils.LOGIN_AUTHOR_USERID, data.get("account").getAsString());
                         sendMessageToHandler(ParameterUtils.CODES.LOGIN_SUCCESS_CODE);
@@ -155,6 +136,10 @@ public class MainActivity extends BaseAbUIActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    protected void handleLoginSuccess(){
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     @Override
@@ -171,7 +156,6 @@ public class MainActivity extends BaseAbUIActivity {
      * 初始化基本配置
      **/
     private void initBaseConfig() {
-        new Thread(new TimeRunnable()).start();
         startNetworkRegisterReceiver();
     }
 
@@ -180,64 +164,15 @@ public class MainActivity extends BaseAbUIActivity {
         Toast.makeText(this, "now the net is " + status, Toast.LENGTH_SHORT).show();
     }
 
-    private final class TimeRunnable implements Runnable {
-        @Override
-        public void run() {
-            while (true) {
-                long curt = System.currentTimeMillis();
-                //LogUtils.warn("message--------------->current time--->" + curt);
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    @Override
+    protected void loginAction() {
+        requestLogin();
     }
 
     @Override
     protected void initView() {
-        mFragmentsViewPager = findViewById(R.id.fg_container);
-    }
-
-    private final class FragmentPageChangeListener implements ViewPager.OnPageChangeListener{
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            LogUtils.debug("message--------------->onPageScrolled (position, positionOffset, positionOffsetPixels)-->(" + position + "," + positionOffset + "," + positionOffsetPixels + ")");
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            LogUtils.debug("message--------------->onPageSelected position-->(" + position + ")");
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-            LogUtils.debug("message--------------->onPageSelected state-->(" + state + ")");
-        }
-    }
-
-    private SingleLayout mSingleLayout;
-    private final class FSubViewClickListener implements SingleLayout.SubViewClickListener {
-        @Override
-        public void onClick(View view) {
-            ToastUtils.toast(getBaseContext(), ((Button) view).getText().toString());
-        }
-    }
-
-    private void mockSingleLayout(){
-        mSingleLayout = findViewById(R.id.sl_dynamic);
-        mSingleLayout.setSubViewClickListener(new FSubViewClickListener());
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(PixelUtils.dip2px(MainActivity.this, 100), PixelUtils.dip2px(MainActivity.this, 45));
-        int margin = PixelUtils.dip2px(MainActivity.this, 15);
-        lp.setMargins(margin, 10, margin, 10);
-        for (int i = 0; i < 8; i++) {
-            Button btn = new Button(mSingleLayout.getContext());
-            btn.setBackgroundResource(R.drawable.btn_shape_sel);
-            btn.setText(getString(R.string.test_btn));
-            btn.setGravity(Gravity.CENTER);
-            mSingleLayout.addView(btn, lp);
-        }
+        mUsernameEt = findViewById(R.id.et_login_username);
+        mPasswordEt = findViewById(R.id.et_login_password);
+        findViewById(R.id.btn_login).setOnClickListener(mBaseClickListener);
     }
 }

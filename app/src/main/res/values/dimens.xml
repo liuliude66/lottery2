@@ -20,4 +20,8 @@
     <dimen name="hot_lottery_mt">10dp</dimen>
 
     <dimen name="hot_lottery_h">30dp</dimen>
+    <dimen name="login_et_container">50dp</dimen>
+    <dimen name="login_txt_size">80dp</dimen>
+    <dimen name="login_mr">15dp</dimen>
+    <dimen name="login_ml">5dp</dimen>
 </resources>
