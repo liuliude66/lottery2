@@ -9,6 +9,15 @@
     <dimen name="bar_bot_font_s">10sp</dimen>
     <dimen name="font_s">10sp</dimen>
     <dimen name="item_lottery_h">30dp</dimen>
-    <dimen name="bar_bot_img_size">30dp</dimen>
+    <dimen name="bar_bot_img_size">26dp</dimen>
+    <dimen name="bar_bot_txt_size">18dp</dimen>
+    <dimen name="bar_bot_txt_mt">1dp</dimen>
     <dimen name="item_lottery_pad8">8dp</dimen>
+    <dimen name="banner_vp">100dp</dimen>
+    <dimen name="notice_imv">30dp</dimen>
+    <dimen name="notice_pad">10dp</dimen>
+    <dimen name="notice_container">40dp</dimen>
+    <dimen name="hot_lottery_mt">10dp</dimen>
+
+    <dimen name="hot_lottery_h">30dp</dimen>
 </resources>
