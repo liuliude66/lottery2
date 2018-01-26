@@ -13,6 +13,9 @@ public class SharedPreferenceUtils {
 
     public static final String NETWORK_STATUS = "NETWORK_STATUS";
 
+    public static final String LOGIN_AUTHOR_USERID = "LOGIN_AUTHOR_USERID";
+    public static final String LOGIN_AUTHOR_ACCOUNT = "LOGIN_AUTHOR_ACCOUNT";
+
     public static void putBoolean(Context context, String key, boolean value){
         SharedPreferences sp = context.getSharedPreferences(SharedPreferXml, Context.MODE_PRIVATE);
         sp.edit().putBoolean(key, value).apply();
