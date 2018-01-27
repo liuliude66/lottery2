@@ -2,35 +2,19 @@ package com.forum.lot.component.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.forum.lot.R;
-import com.forum.lot.adapter.MainFragmentPagerAdapter;
 import com.forum.lot.component.ui.base.BaseAbUIActivity;
-import com.forum.lot.component.ui.fragments.HomeGridFragment;
-import com.forum.lot.component.ui.fragments.LotteryGridFragment;
-import com.forum.lot.component.ui.fragments.LotteryListFragment;
-import com.forum.lot.component.ui.fragments.MatchFragment;
-import com.forum.lot.component.ui.fragments.PersonFragment;
 import com.forum.lot.entity.ResultEntity;
 import com.forum.lot.okhttp.RequestHeader;
-import com.forum.lot.serviceimpl.OkHttpClientManager;
+import com.forum.lot.okhttp.OkHttpClientManager;
 import com.forum.lot.utils.JsonUtils;
 import com.forum.lot.utils.LogUtils;
 import com.forum.lot.utils.ParameterUtils;
-import com.forum.lot.utils.PixelUtils;
 import com.forum.lot.utils.SharedPreferenceUtils;
 import com.forum.lot.utils.ToastUtils;
-import com.forum.lot.view.layout.SingleLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -38,8 +22,6 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Request;
 

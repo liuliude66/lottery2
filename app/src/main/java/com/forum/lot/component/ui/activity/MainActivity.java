@@ -5,10 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.forum.lot.R;
@@ -19,27 +15,11 @@ import com.forum.lot.component.ui.fragments.LotteryGridFragment;
 import com.forum.lot.component.ui.fragments.LotteryListFragment;
 import com.forum.lot.component.ui.fragments.MatchFragment;
 import com.forum.lot.component.ui.fragments.PersonFragment;
-import com.forum.lot.entity.ResultEntity;
-import com.forum.lot.okhttp.RequestHeader;
-import com.forum.lot.serviceimpl.OkHttpClientManager;
-import com.forum.lot.utils.JsonUtils;
 import com.forum.lot.utils.LogUtils;
-import com.forum.lot.utils.ParameterUtils;
-import com.forum.lot.utils.PixelUtils;
-import com.forum.lot.utils.SharedPreferenceUtils;
 import com.forum.lot.utils.ToastUtils;
-import com.forum.lot.view.layout.SingleLayout;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.Request;
 
 public class MainActivity extends BaseAbUIActivity {
 
@@ -62,7 +42,7 @@ public class MainActivity extends BaseAbUIActivity {
 
         initBaseConfig();
 
-        loginRequestTest();
+        //loginRequestTest();
     }
 
     private void initFragments(){
@@ -81,80 +61,6 @@ public class MainActivity extends BaseAbUIActivity {
         mCurTransaction.commit();
 
         mFragmentsViewPager.addOnPageChangeListener(new FragmentPageChangeListener());
-    }
-
-    private void loginRequestTest(){
-        getSessionValidate();
-    }
-
-    private void getSessionValidate(){
-        OkHttpClientManager.getInstance().asyncPost(ParameterUtils.URLS.SESSION_URL, "", new OkHttpClientManager.HttpCallBack() {
-            @Override
-            public void onError(Request request, IOException e) {
-                sendMessageToHandler(ParameterUtils.CODES.OBTAIN_SESSION_FAILURE_CODE);
-            }
-
-            @Override
-            public void onSuccess(Request request, String result) {
-                LogUtils.debug("message--------------->onSuccess--> result->" + result);
-                Gson gson = new Gson();
-                ResultEntity<JsonObject> entity = gson.fromJson(result, new TypeToken<ResultEntity<JsonObject>>(){}.getType());
-                if (entity.code == 0){
-                    JsonObject data = entity.data;
-                    if (JsonUtils.isJson(data.toString())){
-                        sendMessageToHandler(ParameterUtils.CODES.NO_JSON_CODE);
-                        return;
-                    }
-                    RequestHeader.getInstance().sessionID = data.get("sessionid").getAsString();
-                    long expiryTime = data.get("expiryTime").getAsLong();
-                    sendMessageToHandler(ParameterUtils.CODES.OBTAIN_SESSION_SUCCESS_CODE);
-                } else {
-                    sendMessageToHandler(ParameterUtils.CODES.OBTAIN_SESSION_MESSAGE_CODE, entity.msg);
-                }
-            }
-        });
-    }
-
-    @Override
-    protected void obtainSessionFailureAction() {
-
-    }
-
-    @Override
-    protected void obtainSessionSuccessAction() {
-        try {
-            //执行登录操作
-            JSONObject obj = new JSONObject();
-            obj.put("account", "lilei006");
-            obj.put("password", "000000");
-            String parameter = obj.toString();
-            OkHttpClientManager.getInstance().asyncPost(ParameterUtils.URLS.LOGIN_URL, parameter, new OkHttpClientManager.HttpCallBack() {
-                @Override
-                public void onError(Request request, IOException e) {
-                    sendMessageToHandler(ParameterUtils.CODES.LOGIN_FAILURE_CODE);
-                }
-
-                @Override
-                public void onSuccess(Request request, String result) {
-                    Gson gson = new Gson();
-                    ResultEntity<JsonObject> entity = gson.fromJson(result, new TypeToken<ResultEntity<JsonObject>>(){}.getType());
-                    if (entity.code == 0){
-                        JsonObject data = entity.data;
-                        if (JsonUtils.isJson(data.toString())){
-                            sendMessageToHandler(ParameterUtils.CODES.NO_JSON_CODE);
-                            return;
-                        }
-                        SharedPreferenceUtils.putInfo(getBaseContext(), SharedPreferenceUtils.LOGIN_AUTHOR_USERID, String.valueOf(data.get("userId").getAsInt()));
-                        SharedPreferenceUtils.putInfo(getBaseContext(), SharedPreferenceUtils.LOGIN_AUTHOR_USERID, data.get("account").getAsString());
-                        sendMessageToHandler(ParameterUtils.CODES.LOGIN_SUCCESS_CODE);
-                    } else {
-                        sendMessageToHandler(ParameterUtils.CODES.LOGIN_MESSAGE_CODE, entity.msg);
-                    }
-                }
-            });
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -215,29 +121,6 @@ public class MainActivity extends BaseAbUIActivity {
         @Override
         public void onPageScrollStateChanged(int state) {
             LogUtils.debug("message--------------->onPageSelected state-->(" + state + ")");
-        }
-    }
-
-    private SingleLayout mSingleLayout;
-    private final class FSubViewClickListener implements SingleLayout.SubViewClickListener {
-        @Override
-        public void onClick(View view) {
-            ToastUtils.toast(getBaseContext(), ((Button) view).getText().toString());
-        }
-    }
-
-    private void mockSingleLayout(){
-        mSingleLayout = findViewById(R.id.sl_dynamic);
-        mSingleLayout.setSubViewClickListener(new FSubViewClickListener());
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(PixelUtils.dip2px(MainActivity.this, 100), PixelUtils.dip2px(MainActivity.this, 45));
-        int margin = PixelUtils.dip2px(MainActivity.this, 15);
-        lp.setMargins(margin, 10, margin, 10);
-        for (int i = 0; i < 8; i++) {
-            Button btn = new Button(mSingleLayout.getContext());
-            btn.setBackgroundResource(R.drawable.btn_shape_sel);
-            btn.setText(getString(R.string.test_btn));
-            btn.setGravity(Gravity.CENTER);
-            mSingleLayout.addView(btn, lp);
         }
     }
 }

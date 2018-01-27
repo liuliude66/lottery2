@@ -8,8 +8,8 @@ public class ParameterUtils {
 
     //域名
     public final class DOMAIN {
-        public static final String NORMAL_DOMAIN = "https://app.9877890.com"; //正式环境
-        public static final String DEMO_DOMAIN = "https://sw.9877890.com";    //试玩环境
+        public static final String NORMAL_DOMAIN = "https://app.888888.com"; //正式环境
+        public static final String DEMO_DOMAIN = "https://sw.888888.com";    //试玩环境
     }
 
     //各项网络域名的请求地址

@@ -1,9 +1,8 @@
-package com.forum.lot.serviceimpl;
+package com.forum.lot.okhttp;
 
 import android.os.Handler;
 import android.os.Looper;
 
-import com.forum.lot.okhttp.RequestHeader;
 import com.forum.lot.utils.ParameterUtils;
 
 import java.io.IOException;

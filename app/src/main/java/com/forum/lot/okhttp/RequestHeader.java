@@ -1,7 +1,5 @@
 package com.forum.lot.okhttp;
 
-import com.forum.lot.serviceimpl.OkHttpClientManager;
-
 /**
  * 网络请求头
  */
